@@ -19,7 +19,7 @@ async function Adduser(req, res, next) {
 async function getusers(req, res, next) {
   try {
     const users = await user.find();
-    res.json(users);
+    res.status(200).json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -3,7 +3,7 @@
     "_id": "65c7888d779d2452734ce0d2",
     "name": "Ahmed Ali",
     "role": "admin",
-    "email": "admin@dash.io",
+    "email": "admin@natours.io",
     "password": "4444444444444444444400",
     "active": true
   },
@@ -21,7 +21,7 @@
     "_id": "65c789753bbb10f2e36512f2",
     "name": "Ahmed Gebreel",
     "role": "admin",
-    "email": "gebreel@dash.io",
+    "email": "gebreel@example.com",
     "password": "343wsdcdsferfdxcxxdfr",
     "active": true
   },
@@ -45,7 +45,7 @@
     "_id": "65c789573bbb10f2e36512f0",
     "name": "Eman Elsayed",
     "role": "admin",
-    "email": "eman@dash.io",
+    "email": "eman@example.com",
     "password": "755554erdfvxcxc",
     "active": true
   }
