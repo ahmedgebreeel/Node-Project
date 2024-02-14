@@ -1,10 +1,11 @@
 const user = require("../models/userModel");
 async function Adduser(req, res, next) {
-  const { name, role, email, password, active } = req.body;
+  const { name, email, password, passwordConfirm, active } = req.body;
 
   try {
 
-    const newUser = new user({ name, role, email, password, active });
+    const newUser = new user({ name, email, password, passwordConfirm, active });
+    // const { name, email, password, passwordConfirm, active } = req.body;
     const savednewUser = await newUser.save();
     res.status(201).json(savednewUser);
   } catch (error) {

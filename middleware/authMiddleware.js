@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
-
 const { promisify } = require("util");
 async function protect(req, res, next) {
   let token;
+
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     token = req.headers.authorization.split(' ')[1];
   }
@@ -15,8 +15,7 @@ async function protect(req, res, next) {
   console.log(decoded);
   const stillUser = await User.findById(decoded.id);
   if (!stillUser) {
-    c
-
+    return next(res.status(401).json({ error: 'user is no longer exist' }))
   }
   if (stillUser.changPassword(decoded.iat)) {
     return next(
@@ -26,22 +25,19 @@ async function protect(req, res, next) {
 
   req.user = stillUser;
   next();
+
 }
 function restrictTo(role) {
   return (req, res, next) => {
-    // roles ['admin', 'lead-guide']. role='user'
     if ((req.user.role) !== role) {
       return next(
         res.status(403).json({ error: 'You do not have permission to perform this action' })
-        // new AppError('You do not have permission to perform this action', 403)
       );
     }
 
     next();
   };
 };
-
-// module.exports = protect, restrictTo;
 
 module.exports = {
   protect, restrictTo
