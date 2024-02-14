@@ -1,5 +1,4 @@
 const user = require("../models/userModel");
-
 async function Adduser(req, res, next) {
   const { name, role, email, password, active } = req.body;
 
@@ -17,6 +16,7 @@ async function Adduser(req, res, next) {
 }
 
 async function getusers(req, res, next) {
+  console.log(req.headers);
   try {
     const users = await user.find();
     res.status(200).json(users);

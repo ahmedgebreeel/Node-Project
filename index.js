@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require('mongoose');
 const Router = require("./routes/userRoutes.js")
 const dotenv = require("dotenv")
-const { connect } = require("./db")
+const { connect } = require("./db");
 app.use(express.json())
 dotenv.config({ path: './config.env' })
 
@@ -15,6 +15,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/user", Router)
+
 
 connect()
 

@@ -1,10 +1,13 @@
 const router = require("express").Router();
-
+const meddile = require("../middleware/authMiddleware");
+// const { restrictTo } = require("../middleware/authMiddleware");
 const { getusers, Adduser } = require("../controllers/userController");
-const { signup } = require("../controllers/authController")
+const { signup, login } = require("../controllers/authController")
 
-router.route("/").post(Adduser).get(getusers);
+router.route("/").post(Adduser).get(meddile.protect, meddile.restrictTo("admin"), getusers);
 router.route("/singUp").post(signup)
+router.route("/login").post(login)
+
 
 
 module.exports = router
