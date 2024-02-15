@@ -18,9 +18,9 @@ async function signup(req, res, next) {
     res.status(400).json({ error: error.message });
   }
 }
-async function login(req, res, next) {
+// async function login(req, res, next) {
 
-}
+// }
 
 
 
@@ -28,11 +28,11 @@ async function login(req, res, next) {
 
   const { email, password } = req.body;
   if (!email || !password) {
-    res.status(400).json({ error: "Email and password is provided" })
+    res.status(400).json({ error: "Email and password is required" })
   }
   try {
     const user = await User.findOne({ email }).select('+password');
-    const correct = await user.correctPass(password, user.password)
+    const correct = await user.correctPass(password, user.password)//true //false
     if (!user || !correct) {
       res.status(401).json({ error: "Email or password is not correct" })
     }

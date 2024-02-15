@@ -10,9 +10,12 @@ async function protect(req, res, next) {
   if (!token) {
     next(res.status(401).json({ error: "You are not logged in! Please log in to get access" }))
   }
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   // res.status(401).json({ error: "invalid token" });
   console.log(decoded);
+  if (!decoded) {
+    return next(res.status(400).json({ error: 'token is not true' }))
+  }
   const stillUser = await User.findById(decoded.id);
   if (!stillUser) {
     return next(res.status(401).json({ error: 'user is no longer exist' }))

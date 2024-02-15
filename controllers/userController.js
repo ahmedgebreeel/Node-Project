@@ -17,7 +17,7 @@ async function Adduser(req, res, next) {
 }
 
 async function getusers(req, res, next) {
-  console.log(req.headers);
+  // console.log(req.headers);
   try {
     const users = await user.find();
     res.status(200).json(users);
@@ -25,9 +25,15 @@ async function getusers(req, res, next) {
     res.status(500).json({ error: error.message });
   }
 };
+// function getuserId(id){
+//   const user= user.findById(id);
+//   res.status(200).json({user})
 
+
+// }
 
 module.exports = {
   getusers, Adduser
+  // ,getuserId
 
 }
