@@ -1,4 +1,6 @@
 const user = require("../models/userModel");
+
+
 async function Adduser(req, res, next) {
   const { name, email, password, passwordConfirm, active } = req.body;
 
@@ -55,6 +57,8 @@ async function getUserByID(req, res) {
     res.status(400).json({ error: error.message });
   }
 };
+
+
 async function deleteUser(req, res) {
 
   try {
@@ -71,6 +75,8 @@ async function deleteUser(req, res) {
   }
 
 };
+
+
 async function deactive(req, res, next) {
   try {
     const deactiveUser = await user.findByIdAndUpdate(req.params.id, { active: false });
