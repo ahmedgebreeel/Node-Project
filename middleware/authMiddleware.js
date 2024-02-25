@@ -8,19 +8,19 @@ async function protect(req, res, next) {
     token = req.headers.authorization.split(' ')[1];
   }
   if (!token) {
-    next(res.status(401).json({ error: "You are not logged in! Please log in to get access" }))
+    return next(res.status(401).json({ error: "You are not logged in! Please log in to get access" }))
   }
-  decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  decode = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   // res.status(401).json({ error: "invalid token" });
-  console.log(decoded);
-  if (!decoded) {
+  console.log(decode);
+  if (!decode) {
     return next(res.status(400).json({ error: 'token is not true' }))
   }
-  const stillUser = await User.findById(decoded.id);
+  const stillUser = await User.findById(decode.id);
   if (!stillUser) {
     return next(res.status(401).json({ error: 'user is no longer exist' }))
   }
-  if (stillUser.changPassword(decoded.iat)) {
+  if (stillUser.changPassword(decode.iat)) {
     return next(
       res.status(401).json({ error: 'User recently changed password! Please log in again.' })
     );

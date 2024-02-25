@@ -38,11 +38,15 @@ const userSchema = new mongoose.Schema({
   active: {
     type: Boolean,
     default: true,
-    select: false
+    // select: false
   },
   passwordChangedAt: {
     type: Date,
     // required: true
+  }, image: {
+    type: String,
+    default: "default.jpg"
+
   }
 });
 userSchema.pre('save', async function (next) {
@@ -65,8 +69,6 @@ userSchema.methods.changPassword = function (JWTTimestamp) {
 
     return JWTTimestamp < changedTimestamp;
   }
-
-  // False means NOT changed
   return false;
 };
 const User = mongoose.model('User', userSchema);
