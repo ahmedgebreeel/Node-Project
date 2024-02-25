@@ -48,7 +48,7 @@ async function login(req, res, next) {
 
     const token = signToken(user.id);
     res.header("Authorization", `Bearer ${token}`);
-    res.status(200).json({ success: true, message: "Login successful", token });
+    res.status(200).json({ success: true, message: "Login successful", token, role: user.role , userName: user.name });
   } catch (error) {
     res.status(401).json({ error: "Email or password is not correct" });
   }
