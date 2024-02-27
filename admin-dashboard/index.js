@@ -5,6 +5,10 @@ const mongoose = require('mongoose');
 const Router = require("./routes/userRoutes.js")
 const dotenv = require("dotenv")
 const { connect } = require("./db");
+const cors = require("cors");
+
+app.use(cors());
+
 app.use(express.json())
 dotenv.config({ path: './config.env' })
 
@@ -15,6 +19,11 @@ app.get("/", (req, res) => {
 })
 
 app.use("/user", Router)
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Expose-Headers', 'Authorization');
+  next();
+});
 
 
 connect()
