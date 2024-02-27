@@ -2,6 +2,7 @@ const blog = require("../models/blogsModel");
 const sharp = require('sharp');
 const { uploadOneImage } = require("../middleware/uploadImageMiddleware");
 
+const categories = ["Fruits and Vegetables", "Protien", "Starchy Food"];
 
 class APIFeatures {
   constructor(query, queryString) {
@@ -35,6 +36,24 @@ class APIFeatures {
     // console.log(limit)
     // console.log(skip);
     this.query = this.query.skip(skip).limit(limit);
+
+    return this;
+  }
+  filter() {
+    if (this.queryString.filter) {
+      const filterBy = this.queryString.filter.split(',').join(' ');
+      console.log(this.queryString);
+      console.log(filterBy);
+      if (filterBy === "All") {
+        this.query = this.query.find();
+      }
+      else {
+        this.query = this.query.find().where("category").equals(filterBy);
+      }
+
+    } else {
+      this.query = this.query;
+    }
 
     return this;
   }
@@ -78,7 +97,7 @@ async function addBlog(req, res, next) {
 
 async function getBlogs(req, res, next) {
   try {
-    const features = new APIFeatures(blog.find(), req.query)
+    const features = new APIFeatures(blog.find(), req.query).filter()
       .sort()
       .paginate();
     // console.log(req.query);

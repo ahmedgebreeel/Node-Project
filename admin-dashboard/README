@@ -41,3 +41,33 @@ delete(http://localhost:8000/user/{id})
 
 restrictTo(for check role)
 protect(not route if no token)
+
+
+
+
+/////////////////////////////////////////////////
+
+////in blogController
+1- AddBlog
+send token first
+enter(title,description,category,image)
+post(http://localhost:8000/blogs)
+
+2-getBlogs (for admin only)
+send token first
+get(http://localhost:8000/blogs/)
+if want filter(http://localhost:8000/blogs/?filter={categories})
+
+3-getBlogByID(for admin only)
+send token first
+get(http://localhost:8000/blogs/{id})
+
+4-updateBlog(for admin only)
+send token first
+Patch(http://localhost:8000/blogs/{id})
+enter the data want Change
+
+
+5-deleteBlog(for admin only)
+send token
+delete(http://localhost:8000/blogs/{id})
