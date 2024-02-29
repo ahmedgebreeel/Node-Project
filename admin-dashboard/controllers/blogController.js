@@ -68,7 +68,7 @@ const resizeBlogPhoto = async (req, res, next) => {
   await sharp(req.file.buffer)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`uploads/blog/${filename}`);
+    .toFile(`public/images/${filename}`);
   //saveImage as string
   req.body.image = filename
   //saveImage as url

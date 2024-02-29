@@ -13,6 +13,8 @@ app.use(cors());
 app.use(express.json())
 dotenv.config({ path: './config.env' })
 
+app.use(express.static('public'));
+
 
 app.get("/", (req, res) => {
   console.log("Hello", req.url);

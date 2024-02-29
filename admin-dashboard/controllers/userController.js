@@ -89,11 +89,11 @@ const resizeUserPhoto = async (req, res, next) => {
 };
 
 async function Adduser(req, res, next) {
-  const { name, email, password, passwordConfirm, active, image } = req.body;
+  const { name, email, phone,age, password, passwordConfirm, active, image } = req.body;
 
   try {
 
-    const newUser = new user({ name, email, password, passwordConfirm, active, image });
+    const newUser = new user({ name, email, phone,age, password, passwordConfirm, active, image });
     const savednewUser = await newUser.save();
     res.status(201).json("user added successfully");
   } catch (error) {

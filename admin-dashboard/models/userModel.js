@@ -18,6 +18,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     enum: ['user', 'admin'],
     default: 'user'
+  },phone:{
+    type: String,
+    // required:true
+  },
+  age:{
+    type: Number,
+    // required:true
   },
   password: {
     type: String,
