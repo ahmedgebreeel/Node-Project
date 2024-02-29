@@ -98,8 +98,8 @@ async function addBlog(req, res, next) {
 async function getBlogs(req, res, next) {
   try {
     const features = new APIFeatures(blog.find(), req.query).filter()
-      .sort()
-      .paginate();
+      .sort();
+      // .paginate();
     // console.log(req.query);
     const blogs = await features.query;
     // const blogs = await blog.find();

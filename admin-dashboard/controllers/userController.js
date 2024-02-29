@@ -114,7 +114,7 @@ async function Adduser(req, res, next) {
 // };
 async function getusers(req, res, next) {
   try {
-    const feature = new Features(user.find(), req.query).search().sort().paginate();
+    const feature = new Features(user.find(), req.query).search().sort();                ///.paginate()
     const users = await feature.query;
     res.status(200).json(users);
   } catch (error) {
