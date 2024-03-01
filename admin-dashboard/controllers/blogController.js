@@ -61,6 +61,7 @@ class APIFeatures {
 
 const uploadBlogImage = uploadOneImage()
 const resizeBlogPhoto = async (req, res, next) => {
+  
   if (!req.file) return next();
 
   const filename = `blog-${Date.now()}.jpeg`;
@@ -80,6 +81,7 @@ const resizeBlogPhoto = async (req, res, next) => {
 async function addBlog(req, res, next) {
   if (!req.body.user) req.body.user = req.user.id;
   const { title, description, imageUrl, category, user, image } = req.body;
+  console.log(req.body.image);
   try {
     const newBlog = new blog({
       title,
